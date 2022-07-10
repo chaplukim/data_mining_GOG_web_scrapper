@@ -211,9 +211,9 @@ We tested a Query between the game_titles and our new api source: twitch ranking
 Our future plan for this source is to enrich our knowledge about the games.
 
 Some background:
-Twitch is the world's leading live streaming platform for gamers and the things we love. Watch and chat now with millions of other fans from around the world. (Twitch's website).
+Twitch is the world's leading live-streaming platform for gamers and the things we love. Watch and chat now with millions of other fans from around the world. (Twitch's website).
 
-Why we need Twitch:Goog old games (i.e. GOG), is part of the gaming store industry (opponnents: Epic Games (Fortnite) and Steam).
+Why we need Twitch:Goog old games (i.e. GOG), is part of the gaming store industry (opponents: Epic Games (Fortnite) and Steam).
 We had a lack of knowledge about the popularity of those  titles. Therefore, we brought with the API connection new data about the popularity of 1,000 titles.
 
 It's important to understand, GOG is officially selling very old games. On the other side, we tested simple join between the two tables and we found great matching.
@@ -229,12 +229,7 @@ It's important to understand, GOG is officially selling very old games. On the o
 Good to know: Our script has the ability to re-try up to 3 times failures with the API on each loop (due to pagination).
 After the 3rd failure, our script will raise an Error about the error code. (2** - Success, all the rest is failure).
 
-
 ## GIT HUB REPOSITORY
 https://github.com/MagenLahat/Data-mining.git
 
-## CONTACT FOR SUPPORT
-magat261@gmail.com
-
-roy.toled@gmail.com
 

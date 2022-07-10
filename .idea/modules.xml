@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Data-mining.iml" filepath="$PROJECT_DIR$/.idea/Data-mining.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Data_Mining_GOG_web/.idea/Data_Mining_GOG_web.iml" filepath="$PROJECT_DIR$/../Data_Mining_GOG_web/.idea/Data_Mining_GOG_web.iml" />
     </modules>
   </component>
 </project>

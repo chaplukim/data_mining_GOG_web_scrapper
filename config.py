@@ -2,6 +2,8 @@
 Project: Data-Mining GOG (Good Old Games)
 Config File - Contains all the CONSTANTS AND SETUPS for the whole project
 """
+from decouple import config
+
 # General
 NULL_VALUE = None
 EMPTY_STRING = ""
@@ -68,19 +70,22 @@ game_details_text = "details__content table__row-content"
 DATE_FORMAT = '%Y-%m-%d'
 DATETIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
+
 # mysql_data_mining Connection Constants
-MYSQL_DATABASE = "GOG_SCRAPPER_DB"
-MYSQL_HOST = "localhost"
-MYSQL_AUTH = 'mysql_native_password'
+MYSQL_DATABASE = config("MYSQL_DATABASE", default="")
+MYSQL_HOST = config("MYSQL_HOST",default="")
+MYSQL_AUTH = config("MYSQL_AUTH",default="")
 # mysql_data_mining Connection Variables
-mysql_user = "root"
-mysql_password = "Itc12345!"
-mysql_native_authentication = False
+mysql_user = config("mysql_user",default="")
+mysql_password = config("mysql_password",default="")
+mysql_native_authentication = config("mysql_native_authentication", default="", cast=bool)
 
 # Twitch API
-API_CLIENT_ID = "honcjjterpsdgqkmbja3a1688oqnvp"
-API_CLIENT_SECRET = "8qmn61l90ny1k1nb2ujwtl9qujgvlt"
+API_CLIENT_ID = config("API_CLIENT_ID", default="")
+API_CLIENT_SECRET = config("API_CLIENT_SECRET", default="")
 
 # sms
-sms_api_key = "NTRkY2RlNWMwMTMzZjVjMWNmZTkwZTJjOTVhODEwYTE="
-sms_numbers = ['972509666025','972503070737']
+sms_api_key = config("sms_api_key",default="")
+sms_numbers = config("sms_numbers",default="")
+
+'"root"'

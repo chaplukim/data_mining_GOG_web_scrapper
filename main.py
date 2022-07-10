@@ -4,15 +4,15 @@ Students: Roy and Magen
 Main File - Please run this file to start the script
 """
 
-import arguments_parser
+from Scripts import arguments_parser
 import grequests
-import db_creator
+from Scripts.DB import db_creator
 import config
-from game_scrapper import game_page_scrapper
-from import_urls import get_game_urls
-from mysql_writer import WebsiteDB
-from api_twitch import ApiTwitch
-from SMS import sendSMS
+from Scripts.Scrapper.game_scrapper import game_page_scrapper
+from Scripts.Scrapper.import_urls import get_game_urls
+from Scripts.DB.mysql_writer import WebsiteDB
+from Scripts.api_twitch import ApiTwitch
+from Scripts.SMS import sendSMS
 from datetime import datetime
 
 

@@ -1,7 +1,7 @@
 import requests
 import json
 import config
-from mysql_writer import WebsiteDB
+from Scripts.DB.mysql_writer import WebsiteDB
 
 
 class ApiTwitch:
