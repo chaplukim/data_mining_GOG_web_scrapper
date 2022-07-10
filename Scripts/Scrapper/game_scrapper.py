@@ -2,8 +2,8 @@
 Project: Data-Mining GOG (Good Old Games)
 Game Scrapper File
 """
-from import_game_details import get_game_details
-from import_game_data import get_game_data
+from Scripts.Scrapper.import_game_details import get_game_details
+from Scripts.Scrapper.import_game_data import get_game_data
 from bs4 import BeautifulSoup
 import config
 

@@ -87,5 +87,3 @@ API_CLIENT_SECRET = config("API_CLIENT_SECRET", default="")
 # sms
 sms_api_key = config("sms_api_key",default="")
 sms_numbers = config("sms_numbers",default="")
-
-'"root"'
