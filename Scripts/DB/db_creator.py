@@ -1,10 +1,17 @@
+import os
 import mysql.connector
-import config
+import inspect
+import config as cf
+
 
 
 def create_db():
+    user = cf.mysql_user
+    password = cf.mysql_password
+    host = cf.MYSQL_HOST
+
     # establishing the connection
-    conn = mysql.connector.connect(user=config.mysql_user, password=config.mysql_password, host=config.MYSQL_HOST)
+    conn = mysql.connector.connect(user=cf.mysql_user, password=cf.mysql_password, host=cf.MYSQL_HOST)
 
     # Creating a cursor object using the cursor() method
     cursor = conn.cursor()

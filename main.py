@@ -3,30 +3,30 @@ Project: Data-Mining GOG (Good Old Games)u
 Students: Roy and Magen
 Main File - Please run this file to start the script
 """
-
-from Scripts import arguments_parser
 import grequests
 from Scripts.DB import db_creator
-import config
+import config as cf
 from Scripts.Scrapper.game_scrapper import game_page_scrapper
 from Scripts.Scrapper.import_urls import get_game_urls
 from Scripts.DB.mysql_writer import WebsiteDB
 from Scripts.api_twitch import ApiTwitch
 from Scripts.SMS import sendSMS
+from Scripts import cli_cmd_parser
 from datetime import datetime
 
 
 if __name__ == '__main__':
+    n_is_test = True #todo: delete, just to QA to db creation without handling the error of the old script.
     print("""
             ***********************************
             Good Old Games Scrapper has Started
             ***********************************
             """)
-    sms_resp = sendSMS(f"Started SCRAPPING GOG AT {datetime.now()}")
-    print(sms_resp)
+    # sms_resp = sendSMS(f"Started SCRAPPING GOG AT {datetime.now()}")
+    # print(sms_resp)
 
     list_of_games_dict = []  # list of all batches into mysql_data_mining
-    gog_url_partial, args = arguments_parser.filter_args()
+    gog_url_partial, args = cli_cmd_parser.filter_args()
 
     # Twitch API
     """The new API Inegration"""
@@ -44,7 +44,7 @@ if __name__ == '__main__':
         print(f"game counter {counter}")
         counter += 1
         url_batch.append(game_page)
-        if len(url_batch) == config.BATCH_SIZE:
+        if len(url_batch) == cf.BATCH_SIZE:
             print("Batch Size is Full, writing to DB")
             responses = (grequests.get(link) for link in url_batch)
 
