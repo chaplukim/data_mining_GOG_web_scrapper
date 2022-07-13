@@ -19,7 +19,7 @@ TAB_TAG = '&tab='
 PAGE_TAG = '&page='
 
 # IMPORT_URLS CONSTANTS
-CHROMEDRIVER_NAME = 'chromedriver'
+# CHROMEDRIVER_NAME = 'chromedriver'
 BATCH_SIZE = 500
 TEN_SECONDS = 1
 MAIN_TAG = "a"
