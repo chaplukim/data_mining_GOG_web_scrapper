@@ -69,20 +69,20 @@ def filter_args():
                 screen - print to screen 
                 db - write to database
                 both - print to screen and write to the database''',
-                        choices=['screen', 'db', 'both'], default='db')
+                        choices=['screen', 'db', 'both'], default='screen')
 
     # Create DB: YES OR NO
     # DEFAULT: YES
     parser.add_argument('-d', '--db', help='''
-                    yes - create the database schema and tables (DEFAULT)
-                    no - don't create it, if you know it exists or from some other reason
+                    yes - create the database schema and tables 
+                    no - don't create it, if you know it exists or from some other reason (default)
                     ''',
                         choices=['yes', 'no'], default='yes')
 
     parser.add_argument('-t', '--twitch', help= """
-                    yes - Updates Twitch 1000 popular rankings into DB
-                    no - Don't Update Twitch DB (DEFAULT)
-                                                """, choices=["yes", "no"], default="no")
+    yes - Updates Twitch 1000 popular rankings into DB
+    no - Don't Update Twitch DB
+                                                """, choices=["yes", "no"], default="")
 
     args = parser.parse_args()
 

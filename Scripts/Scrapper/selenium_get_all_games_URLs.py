@@ -13,23 +13,29 @@ import time
 import os
 import config
 
-# Constant
-STOP_SELENIUM_AFTER_NO_PAGES = 3
-
 
 def get_game_urls(gog_url):
     """
     Goes through the website pages and fetch all game urls
     :return: a list of all games urls
-    """
-    # User default setting for chromium behavior
-    my_chrome_options = Options()
-    my_chrome_options.add_argument("--headless")
+    """   
 
-    driver = webdriver.Chrome(ChromeDriverManager().install()
-                              , chrome_options=my_chrome_options)
+    driver = webdriver.Chrome(ChromeDriverManager().install())
 
-    # get the first page (ie 1)
+    # old way
+    # options = Options()
+    # options.add_argument("start-maximized")
+    # options.add_argument("--headless")
+    # options.add_argument("--disable-gpu")
+    # options.add_argument("--disable-extensions")
+    # options.add_argument("--no-sandbox")
+    # options.binary_location = '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'
+    # service_args = ['--verbose']
+    # current_directory = os.path.join(os.getcwd(), config.CHROMEDRIVER_NAME)
+    # driver = webdriver.Chrome(),
+    #                           chrome_options=options,
+    #                           service_args=service_args)
+    
     index = config.FIRST_PAGE_INDEX
     game_urls = []
     while index:
@@ -38,25 +44,16 @@ def get_game_urls(gog_url):
         # if index == 3:
         #     break
 
-        # list_length = len(game_urls)
-
-        # opens chrome + GAME ID
+        list_length = len(game_urls)
         driver.get(gog_url + str(index))
         if index > config.FIRST_PAGE_INDEX and driver.current_url == config.GOG_URL:  # if it returns to the first
             # page finish
             break
 
         try:
-            # collecting the number of elements in the page (each game)
             elms = WebDriverWait(driver, config.TEN_SECONDS).until \
                 (EC.presence_of_all_elements_located((By.TAG_NAME, config.MAIN_TAG)))
-            # push to variable "game_urls" the full URL of the game
             for elem in elms:
-                # The href attribute specifies the URL of the page the link goes to.
-                # Gets the given attribute or property of the element.
-                # This method will first try to return the value of a property with the given name.
-                # If a property with that name doesn’t exist, it returns the value of the attribute with the same name.
-                # If there’s no attribute with that name, None is returned.
                 href = elem.get_attribute(config.HREF)
                 if href is not None and href.startswith(config.GAMES_URL_PATH):
                     game_urls.append(href)
@@ -67,9 +64,15 @@ def get_game_urls(gog_url):
             print(f'stale element reference raised for page {index}, skipping page...')
             index += 1
 
-        # no pages threshold for each execution
-        if index == STOP_SELENIUM_AFTER_NO_PAGES:
+        if index == 90:
             break
 
+        # except ConnectionRefusedError:
+        #     print(f'connection refused error raised {index}, skipping page...')
+        #     time.sleep(config.TEN_SECONDS)
+        #     index += 1
+        # list(set(game_urls))
+        # if len(game_urls) - list_length < 5:
+        #     break
     driver.quit()
     return list(set(game_urls))
