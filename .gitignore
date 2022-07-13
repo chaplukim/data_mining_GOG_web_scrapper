@@ -3,5 +3,5 @@
 !/Archive/
 !/chromedriver
 !/Scripts/script_create_tables.sql
-/Archive/
-/settings.ini
+!/.gitignore
+!/Archive/
