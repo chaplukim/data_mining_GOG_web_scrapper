@@ -9,7 +9,7 @@ import config as cf
 from Scripts.Scrapper.game_scrapper import game_page_scrapper
 from Scripts.Scrapper.import_urls import get_game_urls
 from Scripts.DB.mysql_writer import WebsiteDB
-from Scripts.api_twitch import ApiTwitch
+from Scripts.import_Twitch_popularity_API import ApiTwitch
 from Archive.SMS import sendSMS
 from Scripts import cli_cmd_parser
 from datetime import datetime
