@@ -1,6 +1,6 @@
 """
 Project: Data-Mining GOG (Good Old Games)u
-Students: Roy and Magen
+Creator: Roy Toledano
 Main File - Please run this file to start the script
 """
 import grequests
@@ -10,7 +10,7 @@ from Scripts.Scrapper.game_scrapper import game_page_scrapper
 from Scripts.Scrapper.import_urls import get_game_urls
 from Scripts.DB.mysql_writer import WebsiteDB
 from Scripts.api_twitch import ApiTwitch
-from Scripts.SMS import sendSMS
+from Archive.SMS import sendSMS
 from Scripts import cli_cmd_parser
 from datetime import datetime
 
@@ -22,21 +22,18 @@ if __name__ == '__main__':
             Good Old Games Scrapper has Started
             ***********************************
             """)
-    # sms_resp = sendSMS(f"Started SCRAPPING GOG AT {datetime.now()}")
-    # print(sms_resp)
-
     list_of_games_dict = []  # list of all batches into mysql_data_mining
     gog_url_partial, args = cli_cmd_parser.filter_args()
 
     # Twitch API
     """The new API Inegration"""
 
-    if args.twitch == "yes":
+    if (not n_is_test) and args.twitch == "yes":
         api = ApiTwitch()
         call = api.api_twitch_to_mysql()
 
     if args.db == 'yes': # creates the database schema if -d was chosen yes
-        db_creator.create_db()
+        db_creator.create_mysql_db()
 
     url_batch = []  # list of urls for grequests
     counter = 0
@@ -44,6 +41,8 @@ if __name__ == '__main__':
         print(f"game counter {counter}")
         counter += 1
         url_batch.append(game_page)
+
+        # in every batch of collected games-> writes into DB.
         if len(url_batch) == cf.BATCH_SIZE:
             print("Batch Size is Full, writing to DB")
             responses = (grequests.get(link) for link in url_batch)
@@ -57,8 +56,7 @@ if __name__ == '__main__':
 
                     list_of_games_dict.append(game_data)
                 except Exception as ex_message:
-                    print("Issue 1")
-                    print(ex_message)
+                    print("Issue 1", ex_message)
 
             if args.choice == 'db' or args.choice == 'both':
                 try:
@@ -74,5 +72,6 @@ if __name__ == '__main__':
             list_of_games_dict.clear()
             url_batch.clear()
 
-    sms_resp = sendSMS(f"Finished SCRAPPING GOG AT {datetime.now()}")
-    print(sms_resp)
+    if not n_is_test:
+        sms_resp = sendSMS(f"Finished SCRAPPING GOG AT {datetime.now()}")
+        print(sms_resp)

@@ -4,8 +4,7 @@ import inspect
 import config as cf
 
 
-
-def create_db():
+def create_mysql_db():
     user = cf.mysql_user
     password = cf.mysql_password
     host = cf.MYSQL_HOST
@@ -18,14 +17,11 @@ def create_db():
 
     # Doping database MYDATABASE if already exists.
     cursor.execute("DROP DATABASE IF EXISTS GOG_SCRAPPER_DB")
+    cursor.execute("CREATE DATABASE IF NOT EXISTS GOG_SCRAPPER_DB")
 
     q = """SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
     SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
     SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
-    -- -----------------------------------------------------
-    -- Schema GOG_SCRAPPER_DB
-    -- -----------------------------------------------------
 
     -- -----------------------------------------------------
     -- Schema GOG_SCRAPPER_DB
@@ -39,7 +35,7 @@ def create_db():
     CREATE TABLE IF NOT EXISTS `GOG_SCRAPPER_DB`.`game_titles` (
       `title_sku` BIGINT NOT NULL,
       `title_name` VARCHAR(255) NOT NULL,
-      'clean_title_name' VARCHAR(255) NOT NULL,
+      `clean_title_name` VARCHAR(255) NOT NULL,
       `title_release_date` DATE NULL,
       `title_supported_os` VARCHAR(512) NULL,
       `title_company` VARCHAR(255) NULL,
@@ -108,4 +104,5 @@ def create_db():
     SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;"""
 
     cursor.execute(q, multi=True)
+    conn.commit()
     conn.close()

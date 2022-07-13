@@ -7,6 +7,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options
+from webdriver_manager.chrome import ChromeDriverManager
+
 import time
 import os
 import config
@@ -17,17 +19,22 @@ def get_game_urls(gog_url):
     Goes through the website pages and fetch all game urls
     :return: a list of all games urls
     """   
-    options = Options()
-    options.add_argument("start-maximized")
-    options.add_argument("--headless")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--disable-extensions")
-    options.add_argument("--no-sandbox")
-    options.binary_location = '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'
-    service_args = ['--verbose']
-    driver = webdriver.Chrome(os.path.join(os.getcwd(), config.CHROMEDRIVER_NAME),
-                              chrome_options=options,
-                              service_args=service_args)
+
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+
+    # old way
+    # options = Options()
+    # options.add_argument("start-maximized")
+    # options.add_argument("--headless")
+    # options.add_argument("--disable-gpu")
+    # options.add_argument("--disable-extensions")
+    # options.add_argument("--no-sandbox")
+    # options.binary_location = '/Applications/Google Chrome Canary.app/Contents/MacOS/Google Chrome Canary'
+    # service_args = ['--verbose']
+    # current_directory = os.path.join(os.getcwd(), config.CHROMEDRIVER_NAME)
+    # driver = webdriver.Chrome(),
+    #                           chrome_options=options,
+    #                           service_args=service_args)
     
     index = config.FIRST_PAGE_INDEX
     game_urls = []

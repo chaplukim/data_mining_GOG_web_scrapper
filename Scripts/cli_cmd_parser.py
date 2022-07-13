@@ -34,8 +34,14 @@ from argparse import RawTextHelpFormatter
 
 
 def filter_args():
-    # parser = argparse.ArgumentParser(description='search filters')
+    """
+    Parsing the CLI commands before execution of the main script.
+    """
+    # parser object creation
     parser = argparse.ArgumentParser(description='search filters', formatter_class=RawTextHelpFormatter)
+
+    # Filters Game kind: ALL GAMES / GAMES ON SALE / NEW RELEASED GAMES.
+    # by default: ALL GAMES
     parser.add_argument('-m', '--main_filter', help='''
                 main_filter - will select the main page where the scraper will start to scrape from,
                 three options:
@@ -43,6 +49,8 @@ def filter_args():
                 2. on_sale - games that are on a temporary discount 
                 3. new - games that were recently released''',
                         choices=['everything', 'new', 'on_sale'], default='everything')
+
+    # filter scrapper by Price (USD)
     parser.add_argument('-p', '--price_filter', help='''
                 price filter - will filter prices: 
                 u5 - under 5 usd
@@ -55,16 +63,22 @@ def filter_args():
                 ''',
                         choices=['u5', 'u10', 'u15', 'u25', 'a25', 'free',
                                  'discounted'], default='')
+
+    # Script print beahviour
     parser.add_argument('-c', '--choice', help='''
                 screen - print to screen 
                 db - write to database
                 both - print to screen and write to the database''',
                         choices=['screen', 'db', 'both'], default='screen')
+
+    # Create DB: YES OR NO
+    # DEFAULT: YES
     parser.add_argument('-d', '--db', help='''
                     yes - create the database schema and tables 
                     no - don't create it, if you know it exists or from some other reason (default)
                     ''',
-                        choices=['yes', 'no'], default='no')
+                        choices=['yes', 'no'], default='yes')
+
     parser.add_argument('-t', '--twitch', help= """
     yes - Updates Twitch 1000 popular rankings into DB
     no - Don't Update Twitch DB
