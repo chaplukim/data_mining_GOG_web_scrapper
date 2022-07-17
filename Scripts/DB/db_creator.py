@@ -16,7 +16,7 @@ def create_mysql_db():
     cursor = conn.cursor()
 
     # Doping database MYDATABASE if already exists.
-    cursor.execute("DROP DATABASE IF EXISTS GOG_SCRAPPER_DB")
+    # cursor.execute("DROP DATABASE IF EXISTS GOG_SCRAPPER_DB")
     cursor.execute("CREATE DATABASE IF NOT EXISTS GOG_SCRAPPER_DB")
 
     q = """SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
@@ -41,8 +41,7 @@ def create_mysql_db():
       `title_company` VARCHAR(255) NULL,
       `title_size_mb` DECIMAL NULL,
       `title_url` VARCHAR(512) NULL,
-      PRIMARY KEY (`title_sku`))
-    ENGINE = myisam;
+      PRIMARY KEY (`title_sku`));
 
 
     -- -----------------------------------------------------
@@ -59,8 +58,7 @@ def create_mysql_db():
         FOREIGN KEY (`title_sku`)
         REFERENCES `GOG_SCRAPPER_DB`.`game_titles` (`title_sku`)
         ON DELETE NO ACTION
-        ON UPDATE NO ACTION)
-    ENGINE = myisam;
+        ON UPDATE NO ACTION);
 
 
     -- -----------------------------------------------------
@@ -79,8 +77,7 @@ def create_mysql_db():
         FOREIGN KEY (`title_sku`)
         REFERENCES `GOG_SCRAPPER_DB`.`game_titles` (`title_sku`)
         ON DELETE NO ACTION
-        ON UPDATE NO ACTION)
-    ENGINE = myisam;
+        ON UPDATE NO ACTION);
 
 
     -- -----------------------------------------------------
@@ -95,8 +92,7 @@ def create_mysql_db():
         FOREIGN KEY (`title_sku`)
         REFERENCES `GOG_SCRAPPER_DB`.`game_titles` (`title_sku`)
         ON DELETE NO ACTION
-        ON UPDATE NO ACTION)
-    ENGINE = myisam;
+        ON UPDATE NO ACTION);
 
 
     SET SQL_MODE=@OLD_SQL_MODE;

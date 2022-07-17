@@ -1,6 +1,6 @@
 """
 Project: Data-Mining GOG (Good Old Games)
-Sub-file of game_scrapper.py
+Sub-file of main_scrapper.py
 Retrieve Data from game page url
 """
 import re

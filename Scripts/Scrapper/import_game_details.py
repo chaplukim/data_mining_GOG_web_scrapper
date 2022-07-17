@@ -1,6 +1,6 @@
 """
 Project: Data-Mining GOG (Good Old Games)
-Sub-file of game_scrapper.py
+Sub-file of main_scrapper.py
 Retrieve Additional Details (different section on the game page)
 """
 import config
