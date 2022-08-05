@@ -3,15 +3,15 @@ Project: Data-Mining GOG (Good Old Games)u
 Creator: Roy Toledano
 Main File - Please run this file to start the script
 """
-import grequests
+
 from Scripts.DB import db_creator
 import config as cf
 from Scripts.Scrapper.main_scrapper import game_page_scrapper
 from Scripts.Scrapper.selenium_get_all_games_URLs import get_game_urls
 from Scripts.DB.mysql_writer import WebsiteDB
-from Scripts.import_Twitch_popularity_API import ApiTwitch
-from Archive.SMS import sendSMS
 from Scripts import cli_cmd_parser
+from Scripts.import_Twitch_popularity_API import ApiTwitch
+import grequests
 from datetime import datetime
 
 
@@ -31,7 +31,7 @@ if __name__ == '__main__':
         call = api.api_twitch_to_mysql()
 
     # MySQL Create DB
-    if args.db == 'yes': # creates the database schema if -d was chosen yes
+    if args.db == 'yes':  # creates the database schema if -d was chosen yes
         db_creator.create_mysql_db()
 
     url_batch = []  # list of urls for grequests
